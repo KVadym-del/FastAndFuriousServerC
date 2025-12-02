@@ -1,0 +1,10 @@
+*.crt
+*.key
+
+compile_commands.json
+
+out/
+
+__cmake_systeminformation/
+
+.cache/
