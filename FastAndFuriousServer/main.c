@@ -1,5 +1,4 @@
-//#include "../Include/FastAndFuriousServer.h"
-#include "../Include/Encription.h"
+#include "Include/faf_server.h"
 
 #define PORT 28876
 #define IP_ADDRESS "0.0.0.0"

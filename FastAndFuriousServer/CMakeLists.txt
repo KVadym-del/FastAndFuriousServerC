@@ -4,9 +4,8 @@ find_package(libuv CONFIG REQUIRED)
 
 add_executable (
     FastAndFuriousServer
-    "Source/main.c"
-    "Include/FastAndFuriousServer.h"
-    "Include/Encription.h"
+    "main.c"
+    "Include/faf_server.h"
 )
 
 if (CMAKE_VERSION VERSION_GREATER 3.25)
