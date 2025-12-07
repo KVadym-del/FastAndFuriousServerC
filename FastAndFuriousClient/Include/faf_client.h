@@ -265,7 +265,11 @@ faf_client_t* faf_init(const char *ip_addr, int port, void *user_data) {
     OSSL_PROVIDER_load(NULL, "default");
 
     faf_client_t *c = (faf_client_t*)calloc(1, sizeof(faf_client_t));
-    strncpy(c->ip, ip_addr, 63);
+    #ifdef _WIN32
+        strncpy_s(c->ip, sizeof(c->ip), ip_addr, 63);
+    #else
+        strncpy(c->ip, ip_addr, 63);
+    #endif
     c->port = port;
     c->user_data = user_data;
     uv_mutex_init(&c->queue_lock);
