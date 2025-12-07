@@ -49,6 +49,8 @@ void faf_close(faf_client_t *ctx);
 
 #ifdef FAF_CLIENT_IMPLEMENTATION
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -103,7 +105,7 @@ static void faf__pump_net(faf_client_t *c) {
         int n = BIO_read(c->bio_write, buf, sizeof(buf));
         if (n <= 0) break;
 
-        uv_buf_t ub = uv_buf_init(malloc(n), n);
+        uv_buf_t ub = uv_buf_init((char*)malloc(n), n);
         memcpy(ub.base, buf, n);
 
         uv_write_t *req = (uv_write_t*)malloc(sizeof(uv_write_t));
@@ -139,7 +141,7 @@ static void faf__pump_wrapper(faf_client_t *c) {
 
 static void faf__on_alloc(uv_handle_t *h, size_t size, uv_buf_t *buf) {
     buf->base = (char*)malloc(size);
-    buf->len = size;
+    buf->len = (unsigned long)size;
 }
 
 static void faf__on_read(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf) {
